@@ -1,0 +1,31 @@
+﻿@page "{id:int}"
+@model Gympt.Pages.Memberships.MembershipEditModel
+
+<h2>Editar Membresía</h2>
+
+<form method="post">
+    <input type="hidden" asp-for="Membership.Id" />
+
+    <div class="mb-3">
+        <label>Nombre</label>
+        <input asp-for="Membership.Name" class="form-control" />
+    </div>
+
+    <div class="mb-3">
+        <label>Precio</label>
+        <input asp-for="Membership.Price" class="form-control" />
+    </div>
+
+    <div class="mb-3">
+        <label>Descripción</label>
+        <textarea asp-for="Membership.Description" class="form-control"></textarea>
+    </div>
+
+    <div class="mb-3">
+        <label>Sesiones Mensuales</label>
+        <input asp-for="Membership.MonthlySessions" class="form-control" />
+    </div>
+
+    <button class="btn btn-primary" type="submit">Actualizar</button>
+    <a asp-page="Memberships" class="btn btn-secondary">Volver</a>
+</form>

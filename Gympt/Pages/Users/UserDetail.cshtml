@@ -1,0 +1,62 @@
+﻿@page "{id:int}"
+@model GYMPT.Pages.Users.UserDetailModel
+@{
+    ViewData["Title"] = "Detalles del Usuario";
+}
+
+@if (Model.User != null)
+{
+    <div class="card shadow-sm">
+        <div class="card-header">
+            <h1 class="h3">@ViewData["Title"]: @Model.User.name @Model.User.first_lastname</h1>
+        </div>
+        <div class="card-body">
+            <!-- Usamos una lista de definición para mostrar los datos -->
+            <dl class="row">
+                <dt class="col-sm-3">Nombre Completo</dt>
+                <dd class="col-sm-9">@Model.User.name @Model.User.first_lastname @Model.User.second_lastname</dd>
+
+                <dt class="col-sm-3">Email</dt>
+                <dd class="col-sm-9">@Model.User.email</dd>
+
+                <dt class="col-sm-3">CI</dt>
+                <dd class="col-sm-9">@Model.User.ci</dd>
+
+                <dt class="col-sm-3">Fecha de Nacimiento</dt>
+                <dd class="col-sm-9">@Model.User.date_birth.ToString()</dd>
+
+                <dt class="col-sm-3">Rol</dt>
+                <dd class="col-sm-9">@Model.User.role</dd>
+
+                <dt class="col-sm-3">Estado</dt>
+                <dd class="col-sm-9">@(Model.User.is_active ? "Activo" : "Inactivo")</dd>
+
+                @if (Model.User.role == "Instructor" || Model.User.role == "Admin")
+                {
+                    <hr class="my-3" />
+                    <h5 class="text-success">Información de Instructor</h5>
+                    <dt class="col-sm-3">Fecha de Contratación</dt>
+                    <dd class="col-sm-9">@Model.User.hire_date?.ToShortDateString()</dd>
+
+                    <dt class="col-sm-3">Salario Mensual</dt>
+                    <dd class="col-sm-9">@Model.User.monthly_salary?.ToString("C")</dd>
+
+                    <dt class="col-sm-3">Especialización</dt>
+                    <dd class="col-sm-9">@Model.User.specialization</dd>
+                }
+            </dl>
+        </div>
+        <div class="card-footer text-end">
+            @* Solo mostrar el botón si el usuario actual es SuperAdmin o si el rol del usuario mostrado no es Admin *@
+            @if (User.IsInRole("SuperAdmin") || Model.User.role != "Admin")
+            {
+                <a asp-page="/Users/UserEdit" asp-route-id="@Model.User.id" class="btn btn-primary">
+                    <i class="fas fa-pencil-alt"></i> Editar
+                </a>
+            }
+            <a asp-page="/Users/Users" class="btn btn-secondary">
+                <i class="fas fa-arrow-left"></i> Volver a la Lista
+            </a>
+        </div>
+    </div>
+}

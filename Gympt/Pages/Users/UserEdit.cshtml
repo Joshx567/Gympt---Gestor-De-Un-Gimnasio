@@ -1,0 +1,114 @@
+﻿@page "{id:int}"
+@model GYMPT.Pages.Users.UserEditModel
+@{
+    ViewData["Title"] = "Editar Instructor";
+}
+
+<div class="card shadow-sm">
+    <div class="card-header">
+        <!-- El título muestra dinámicamente el nombre del instructor que se está editando -->
+        <h1 class="h3">@ViewData["Title"]: @Model.Instructor.name @Model.Instructor.first_lastname</h1>
+    </div>
+    <div class="card-body">
+        <form method="post">
+            <!-- Muestra un resumen de los errores de validación en la parte superior -->
+            <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+
+            <!-- Campo oculto para mantener el ID del instructor al enviar el formulario -->
+            <input type="hidden" asp-for="Instructor.id" />
+
+            <h5 class="mt-4 mb-3">Información Personal</h5>
+            <hr />
+            <div class="row">
+                <div class="col-md-4 mb-3">
+                    <label asp-for="Instructor.name" class="form-label fw-bold">Nombre</label>
+                    <input asp-for="Instructor.name" class="form-control" />
+                    <span asp-validation-for="Instructor.name" class="text-danger"></span>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <label asp-for="Instructor.first_lastname" class="form-label fw-bold">Primer Apellido</label>
+                    <input asp-for="Instructor.first_lastname" class="form-control" />
+                    <span asp-validation-for="Instructor.first_lastname" class="text-danger"></span>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <label asp-for="Instructor.second_lastname" class="form-label fw-bold">Segundo Apellido</label>
+                    <input asp-for="Instructor.second_lastname" class="form-control" />
+                    <span asp-validation-for="Instructor.second_lastname" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label asp-for="Instructor.ci" class="form-label fw-bold">Cédula de Identidad</label>
+                    <input asp-for="Instructor.ci" class="form-control" />
+                    <span asp-validation-for="Instructor.ci" class="text-danger"></span>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label asp-for="Instructor.date_birth" class="form-label fw-bold">Fecha de Nacimiento</label>
+                    <input asp-for="Instructor.date_birth" class="form-control" type="date" />
+                    <span asp-validation-for="Instructor.date_birth" class="text-danger"></span>
+                </div>
+
+            </div>
+
+            @if (User.IsInRole("Admin"))
+            {
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label asp-for="Instructor.role" class="form-label fw-bold">Rol</label>
+                        <select asp-for="Instructor.role" class="form-control">
+                            <option value="Instructor">Instructor</option>
+                            <option value="Admin">Admin</option>
+                        </select>
+                        <span asp-validation-for="Instructor.role" class="text-danger"></span>
+                    </div>
+                </div>
+            }
+
+            <hr />
+            <h5 class="mt-4 mb-3">Información Profesional</h5>
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label asp-for="Instructor.specialization" class="form-label fw-bold">Especialización</label>
+                    <input asp-for="Instructor.specialization" class="form-control" placeholder="Ej: Yoga, CrossFit, Pesas..." />
+                    <span asp-validation-for="Instructor.specialization" class="text-danger"></span>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label asp-for="Instructor.hire_date" class="form-label fw-bold">Fecha de Contratación</label>
+                    <input asp-for="Instructor.hire_date" class="form-control" type="date" />
+                    <span asp-validation-for="Instructor.hire_date" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label asp-for="Instructor.monthly_salary" class="form-label fw-bold">Salario Mensual (Bs.)</label>
+                    <input asp-for="Instructor.monthly_salary" class="form-control" type="number" step="0.01" />
+                    <span asp-validation-for="Instructor.monthly_salary" class="text-danger"></span>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label asp-for="Instructor.email" class="form-label fw-bold">Correo Electrónico</label>
+                    <input asp-for="Instructor.email" class="form-control" />
+                    <span asp-validation-for="Instructor.email" class="text-danger"></span>
+                </div>
+            </div>
+
+            <!-- Botones de Acción -->
+            <div class="mt-4 text-end">
+                <button type="submit" class="btn btn-success">
+                    <i class="fas fa-save"></i> Guardar Cambios
+                </button>
+                <a asp-page="/Users/Users" class="btn btn-secondary">
+                    <i class="fas fa-times"></i> Cancelar
+                </a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        // Habilita la validación del lado del cliente (JavaScript)
+        <partial name="_ValidationScriptsPartial" />
+    }
+}

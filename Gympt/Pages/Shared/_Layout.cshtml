@@ -1,0 +1,172 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Gympt</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/Gympt.styles.css" asp-append-version="true" />
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+            <div class="container">
+
+                <a class="navbar-brand d-flex align-items-center" asp-area="" asp-page="/Index">
+                    <strong>GYMPT</strong>
+                </a>
+
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                        data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="navbar-collapse collapse d-sm-inline-flex">
+
+                    <!-- MENÚ IZQUIERDA -->
+                    <ul class="navbar-nav flex-grow-1">
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-page="/Privacy">Privacy</a>
+                        </li>
+
+                        @if (User.Identity is { IsAuthenticated: true })
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-page="/Clients/Clients">Clientes</a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-page="/Disciplines/Disciplines">Disciplinas</a>
+                            </li>
+
+                            @* Solo Admin y SuperAdmin ven estas secciones *@
+                            @if (User.IsInRole("Admin") || User.IsInRole("SuperAdmin"))
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-page="/Users/Users">Usuarios</a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-page="/Memberships/Memberships">Membresías</a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-page="/Reports/Index">Reportes</a>
+                                </li>
+                            }
+                        }
+                    </ul>
+
+                    <!-- MENÚ DERECHA -->
+                    <ul class="navbar-nav">
+                        @if (User.Identity is { IsAuthenticated: true })
+                        {
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle text-dark" href="#" id="navbarUserDropdown"
+                                   role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <i class="fa-solid fa-user me-1"></i>
+                                    Hola, <strong>@User.Identity.Name</strong>
+                                </a>
+
+                                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarUserDropdown">
+                                    <li>
+                                        <h6 class="dropdown-header">
+                                            @User.FindFirst(System.Security.Claims.ClaimTypes.Email)?.Value
+                                        </h6>
+                                    </li>
+
+                                    <li><hr class="dropdown-divider"></li>
+
+                                    <li>
+                                        <!-- Cerrar sesión -->
+                                        <button class="dropdown-item" onclick="document.getElementById('logoutForm').submit()">
+                                            <i class="fa-solid fa-right-from-bracket me-2"></i> Cerrar Sesión
+                                        </button>
+                                    </li>
+                                </ul>
+                            </li>
+                        }
+                        else
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-page="/Login/Login">
+                                    <i class="bi bi-box-arrow-in-right me-1"></i> Iniciar Sesión
+                                </a>
+                            </li>
+                        }
+                    </ul>
+
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="footer bg-black bg-opacity-50">
+        <div class="container">
+            <div class="row flex-row flex-wrap align-items-start">
+
+                <div class="col-lg-4 col-md-6 mb-5 mb-lg-0">
+                    <h2 class="text-white mb-4">GymFit</h2>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+                </div>
+
+                <div class="col-lg-3 col-md-6 mb-5 mb-lg-0">
+                    <div class="footer-widget recent-blog">
+                        <h4 class="mb-4 text-white letter-spacing text-uppercase">Publicaciones recientes</h4>
+                        <div>
+                            <a href="blog-single.html" class="text-white">Claritas est etiam processus dynamicus</a>
+                            <p class="text-sm mt-2 text-white-50">12 de octubre, 2025</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-2 col-md-6 mb-5 mb-lg-0">
+                    <div class="footer-widget">
+                        <h4 class="mb-4 text-white letter-spacing text-uppercase">Enlaces rápidos</h4>
+                        <ul class="list-unstyled footer-menu lh-40 mb-0">
+                            <li><a href="">Acerca de nosotros</a></li>
+                            <li><a href="">Servicios</a></li>
+                            <li><a href="">Membresías</a></li>
+                            <li><a href="">Cursos</a></li>
+                            <li><a href="">Contactáctanos</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-6">
+                    <div class="footer-widget">
+                        <h4 class="mb-4 text-white letter-spacing text-uppercase">Nuestra ubicación</h4>
+                        <p>Cochabamba 6036 Tupuraya, Cbba, CB BOL 22303</p>
+                        <span class="text-white d-block">+591 (555) 987–5874</span>
+                        <span class="text-white d-block">gympt@gg.bo</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row align-items-center mt-5 px-3 bg-black mx-1">
+                <div class="col-lg-4">
+                    <p class="text-white mt-3">GYMPT © 2025</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+
+    <!-- FORMULARIO OCULTO DE LOGOUT -->
+    <form id="logoutForm" method="post" asp-page="/Login/Logout"></form>
+
+</body>
+</html>

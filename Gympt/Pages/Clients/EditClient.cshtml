@@ -1,0 +1,90 @@
+﻿@page "{id:int}"
+@model EditClientModel
+
+<h2>Editar Cliente</h2>
+
+@if (!ViewData.ModelState.IsValid)
+{
+    <div class="alert alert-danger">
+        @foreach (var modelError in ViewData.ModelState.Values.SelectMany(v => v.Errors))
+        {
+            <p>@modelError.ErrorMessage</p>
+        }
+    </div>
+}
+<form method="post" class="mt-3">
+    <input type="hidden" asp-for="Client.Id" />
+
+    <div class="mb-3">
+        <label class="form-label">Nombre</label>
+        <input asp-for="Client.Name" class="form-control" />
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Primer Apellido</label>
+        <input asp-for="Client.FirstLastname" class="form-control" />
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Segundo Apellido</label>
+        <input asp-for="Client.SecondLastname" class="form-control" />
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">CI</label>
+        <input asp-for="Client.Ci" class="form-control" />
+    </div>
+
+    <div class="mb-3">
+        <label>Fecha de Nacimiento</label>
+        <input asp-for="Client.DateBirth" type="date" class="form-control" />
+    </div>
+
+    <div class="form-check mb-4">
+        <input asp-for="Client.IsActive" class="form-check-input" />
+        <label class="form-check-label">Activo</label>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Nivel de Fitness</label>
+        <input asp-for="Client.FitnessLevel" class="form-control" />
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Peso Inicial (kg)</label>
+        <input asp-for="Client.InitialWeightKg" type="number" step="0.1" class="form-control" />
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Peso Actual (kg)</label>
+        <input asp-for="Client.CurrentWeightKg" type="number" step="0.1" class="form-control" />
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Teléfono de Emergencia</label>
+        <input asp-for="Client.EmergencyContactPhone" class="form-control" />
+    </div>
+
+    <div class="mb-3">
+        <label>Creado Por</label>
+        <input asp-for="Client.CreatedBy" class="form-control" readonly />
+    </div>
+
+    <div class="mb-3">
+        <label>Fecha de Creación</label>
+        <input asp-for="Client.CreatedAt" class="form-control" readonly />
+    </div>
+
+    <div class="mb-3">
+        <label>Última Modificación</label>
+        <input asp-for="Client.LastModification" class="form-control" readonly />
+    </div>
+
+    <div class="mb-3">
+        <label>Modificado Por</label>
+        <input asp-for="Client.LastModifiedBy" class="form-control" readonly />
+    </div>
+
+    <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+    <a class="btn btn-secondary" asp-page="/Clients/Clients">Cancelar</a>
+</form>

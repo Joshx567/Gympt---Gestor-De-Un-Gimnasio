@@ -1,0 +1,76 @@
+﻿@page
+@model CreateClientModel
+
+<h2>Registrar Cliente</h2>
+
+@if (!ViewData.ModelState.IsValid)
+{
+    <div class="alert alert-danger">
+        @foreach (var modelError in ViewData.ModelState.Values.SelectMany(v => v.Errors))
+        {
+            <p>@modelError.ErrorMessage</p>
+        }
+    </div>
+}
+
+<form method="post">
+    <div class="mb-3">
+        <label>Nombre</label>
+        <input asp-for="Client.Name" class="form-control" />
+    </div>
+
+    <div class="mb-3">
+        <label>Primer Apellido</label>
+        <input asp-for="Client.FirstLastname" class="form-control" />
+    </div>
+
+    <div class="mb-3">
+        <label>Segundo Apellido</label>
+        <input asp-for="Client.SecondLastname" class="form-control" />
+    </div>
+
+    <div class="mb-3">
+        <label>CI</label>
+        <input asp-for="Client.Ci" class="form-control" />
+    </div>
+
+    <div class="mb-3">
+        <label>Fecha de Nacimiento</label>
+        <input asp-for="Client.DateBirth" type="date" class="form-control" />
+    </div>
+
+    <div class="mb-3">
+        <label>Nivel de Fitness</label>
+        <select asp-for="Client.FitnessLevel" class="form-control">
+            <option value="Principiante">Principiante</option>
+            <option value="Intermedio">Intermedio</option>
+            <option value="Avanzado">Avanzado</option>
+        </select>
+    </div>
+
+    <div class="mb-3">
+        <label>Peso Inicial (kg)</label>
+        <input asp-for="Client.InitialWeightKg" type="number" step="0.1" class="form-control" />
+    </div>
+
+    <div class="mb-3">
+        <label>Peso Actual (kg)</label>
+        <input asp-for="Client.CurrentWeightKg" type="number" step="0.1" class="form-control" />
+    </div>
+
+    <div class="mb-3">
+        <label>Teléfono de Emergencia</label>
+        <input asp-for="Client.EmergencyContactPhone" class="form-control" />
+    </div>
+    <div class="mb-3">
+        <label>Creado Por</label>
+        <input asp-for="Client.CreatedBy" class="form-control" readonly />
+    </div>
+    <div class="mb-3">
+        <label>Fecha de Creación</label>
+        <input asp-for="Client.CreatedAt" class="form-control" readonly />
+    </div>
+
+    <button type="submit" class="btn btn-success">Guardar</button>
+    <a asp-page="/Clients/Clients" class="btn btn-secondary">Cancelar</a>
+</form>

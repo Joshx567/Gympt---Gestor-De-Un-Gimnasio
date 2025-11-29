@@ -1,0 +1,87 @@
+﻿﻿ /* Please see documentation at https://learn.microsoft.com/aspnet/core/client-side/bundling-and-minification
+for details on configuring this project to bundle and minify static web assets. */
+a.navbar-brand {
+    white-space: normal;
+    text-align: center;
+    word-break: break-all;
+}
+
+a {
+    color: #0077cc;
+}
+
+.btn-primary {
+    color: #fff;
+    background-color: #1b6ec2;
+    border-color: #1861ac;
+}
+
+.nav-pills .nav-link.active, .nav-pills .show > .nav-link {
+    color: #fff;
+    background-color: #1b6ec2;
+    border-color: #1861ac;
+}
+
+.border-top {
+    border-top: 1px solid #e5e5e5;
+}
+
+.border-bottom {
+    border-bottom: 1px solid #e5e5e5;
+}
+
+.box-shadow {
+    box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
+}
+
+button.accept-policy {
+    font-size: 1rem;
+    line-height: inherit;
+}
+
+.footer {
+    padding-bottom: 20px;
+    padding-top: 30px;
+    background-color: #111;
+}
+
+    .footer p {
+        color: #fff;
+        opacity: 0.8;
+        font-size: 14px;
+    }
+
+.bg-black {
+    background: #111;
+}
+
+.footer-menu li a {
+    color: #fff;
+    opacity: 0.8;
+    font-size: 14px;
+}
+
+    .footer-menu li a:hover {
+        color: rgb(245, 99, 75);
+        opacity: 1;
+    }
+
+.lh-40 {
+    line-height: 40px;
+}
+
+.footer-socials li a {
+    color: #fff;
+    opacity: 0.8;
+}
+
+.recent-blog a {
+    line-height: 1.5;
+    font-size: 14px;
+}
+
+.footer-socials li a {
+    color: #595b65;
+    font-size: 18px;
+    padding-left: 10px;
+}

@@ -1,0 +1,29 @@
+﻿@page
+@model Gympt.Pages.Memberships.MembershipCreateModel
+
+<h2>Crear Membresía</h2>
+
+<form method="post">
+    <div class="mb-3">
+        <label>Nombre</label>
+        <input asp-for="Membership.Name" class="form-control" />
+    </div>
+
+    <div class="mb-3">
+        <label>Precio</label>
+        <input asp-for="Membership.Price" class="form-control" />
+    </div>
+
+    <div class="mb-3">
+        <label>Descripción</label>
+        <textarea asp-for="Membership.Description" class="form-control"></textarea>
+    </div>
+
+    <div class="mb-3">
+        <label>Sesiones Mensuales</label>
+        <input asp-for="Membership.MonthlySessions" class="form-control" />
+    </div>
+
+    <button class="btn btn-success" type="submit">Guardar</button>
+    <a asp-page="Memberships" class="btn btn-secondary">Volver</a>
+</form>

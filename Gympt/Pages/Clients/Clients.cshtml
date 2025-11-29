@@ -1,0 +1,68 @@
+﻿@page
+@model ClientsModel
+@{
+    ViewData["Title"] = "Clientes";
+}
+
+<h2 class="mt-3">Lista de Clientes</h2>
+
+<table class="table table-striped mt-4">
+    <thead>
+        <tr>
+            <th>Nombre Completo</th>
+            <th>CI</th>
+            <th>Nivel Fitness</th>
+            <th>Contacto Emergencia</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var client in Model.Clients)
+        {
+            <tr>
+                <td>@client.Name @client.FirstLastname @client.SecondLastname</td>
+                <td>@client.Ci</td>
+                <td>@client.FitnessLevel</td>
+                <td>@client.EmergencyContactPhone</td>
+
+                <td>
+                    <a class="btn btn-sm btn-primary" asp-page="/Clients/EditClient" asp-route-id="@client.Id">
+                        Editar
+                    </a>
+
+                    <!-- Botón que abre el modal -->
+                    <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal-@client.Id">
+                        Eliminar
+                    </button>
+
+                    <!-- Modal de confirmación -->
+                    <div class="modal fade" id="deleteModal-@client.Id" tabindex="-1" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+
+                                <div class="modal-header">
+                                    <h5 class="modal-title">Confirmar eliminación</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                </div>
+
+                                <div class="modal-body">
+                                    ¿Seguro que deseas eliminar al cliente <strong>@client.Name</strong>?
+                                </div>
+
+                                <div class="modal-footer">
+                                    <form method="post" asp-page-handler="Delete" asp-route-id="@client.Id">
+                                        <button class="btn btn-danger">Eliminar</button>
+                                    </form>
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<a class="btn btn-success" asp-page="/Clients/CreateClient">Nuevo Cliente</a>

@@ -1,0 +1,39 @@
+﻿@page
+@model Gympt.Pages.Login.LoginModel
+@{
+    ViewData["Title"] = "Login";
+}
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card shadow-sm">
+                <div class="card-header bg-primary text-white">
+                    <h3 class="mb-0">Iniciar Sesión</h3>
+                </div>
+                <div class="card-body">
+                    <form method="post">
+                        <div class="mb-3">
+                            <label asp-for="Login.Email" class="form-label">Correo electrónico</label>
+                            <input asp-for="Login.Email" type="email" class="form-control" placeholder="correo@ejemplo.com" required />
+                            <span asp-validation-for="Login.Email" class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="Login.Password" class="form-label">Contraseña</label>
+                            <input asp-for="Login.Password" type="password" class="form-control" placeholder="Contraseña" required />
+                            <span asp-validation-for="Login.Password" class="text-danger"></span>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary w-100">Iniciar Sesión</button>
+                    </form>
+
+                    <div class="mt-3 text-center text-danger">
+                        @Html.ValidationSummary(false)
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
